@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+
+.write-type, .write-label{
+    display: inline-block !important;
+    padding: 6px 8px !important;
+    color: #fff;
+    background-color: #01984c;
+    border-radius: 3px;
+}
+.write-type:hover{
+    background-color: #006600;
+}
+.write-type-active{
+    background-color: #006600;
+}
+.write-type > input, .write-label > input{
+    display: none;
+}
+.write-type > label, .write-label > label{
+    cursor: pointer;
+    display: block;
+    margin: 0;
+}
+.write-label{
+    background-color: #1CA5B8;
+}
+.write-label:hover{
+    background-color: #125c7d;
+}
+.write-label-active{
+    background-color: #125c7d;
+}
+.submit-btn{
+    margin-bottom: 100px;
+}
+.submit-btn:hover{
+    color: #fff;
+    background-color: #FF404E;
+    border: 1px solid #FF404E;
+}

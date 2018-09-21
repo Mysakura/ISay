@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+
+
+
+.register-label{
+    line-height: 35px;
+}
+
+
+.login-form{
+    margin-top: 55px;
+    margin-bottom: 25px;
+    padding: 35px 15px;
+    box-shadow: 0 1px 10px #c3c3c3;
+}
+.login-input{
+    height: 40px;
+}
+
+.login-submit-btn{
+    background-color: #20b7cc;
+    color: #fff;
+    font-size: 18px;
+    line-height: 30px;
+    height: 45px;
+    border: 1px solid #20b7cc;
+}
+.login-submit-btn:hover{
+    background-color: #1CA5B8;
+}
+.login-add-margin{
+    margin-bottom: 150px;
+}
+
+
+@media only screen and (max-width: 992px) {
+
+
+}
+

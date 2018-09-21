@@ -1,0 +1,68 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+.vote-wrap, .vote-wrap .vote{
+    margin-top: 25px;
+}
+
+.vote-info{
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #d1ecff;
+    color: #5d5d5d;
+}
+.vote-info > a{
+    font-size: 18px;
+    padding: 0 8px;
+}
+.vote-info > span{
+    padding: 0 8px;
+    color: #25ca94;
+}
+
+.vote-description{
+    text-align: justify;
+    font-size: 16px;
+    color: #5d5d5d;
+}
+
+.vote-operate{
+    padding: 8px;
+}
+.vote-operate .vote-num{
+    float: right;
+    padding: 8px 20px;
+    background-color: #fff;
+    color: #ff404e;
+    border-radius: 3px;
+    font-weight: 700;
+}
+.vote-operate > .active{
+    background-color: #FF404E;
+    border: 3px solid #FF404E;
+    color: #fff;
+}
+.vote-operate > a{
+    display: block;
+    border: 3px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+.vote-operate > a:hover{
+	background-color: #FF404E;
+    color: #fff;
+    border: 3px solid #c30917;
+}
+.vote-operate > a > input{
+    display: none;
+}
+.vote-operate > a > label{
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 20px;
+    margin: 0;
+}
+
+
+

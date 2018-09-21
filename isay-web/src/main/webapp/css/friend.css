@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+/*mb:messageBoard*/
+
+.friend-add-padding{
+    padding-top: 100px;
+    padding-bottom: 25px;
+}
+.friend-add-margin{
+    margin-bottom: 100px;
+}
+
+.friend-wrap{
+    /*min-height: 500px;*/
+    padding: 15px;
+    overflow: hidden;
+}
+.friend-wrap:hover{
+	box-shadow: 0 1px 10px #abaaaa;
+}
+

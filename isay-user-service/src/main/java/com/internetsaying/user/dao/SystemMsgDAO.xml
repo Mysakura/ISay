@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.user.dao.SystemMsgDAO">
+	
+	<resultMap type="SystemMessage" id="systemMessage">
+		<id column="msg_id" property="id"/>
+		<result column="user_id" property="user.userId"/>
+		<result column="msg_content" property="msgContent"/>
+		<result column="msg_time" property="time"/>
+	</resultMap>
+	
+	<insert id="addSystemMsg" parameterType="SystemMessage">
+		insert into system_message values(#{id},#{user.userId},#{msgContent},#{time})
+	</insert>
+	
+	<delete id="deleteSystemMsg" parameterType="SystemMessage">
+		delete from system_message where msg_id = #{id}
+	</delete>
+	
+	<select id="getSystemMsgListForUser" resultMap="systemMessage">
+		select * from system_message where user_id = #{userId} order by msg_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getSystemMsgListForAll" resultMap="systemMessage">
+		select * from system_message order by msg_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getSysCountForUser" resultType="int">
+		select count(*) from system_message where user_id = #{userId}
+	</select>
+	
+	<select id="getSysCountForAll" resultType="int">
+		select count(*) from system_message
+	</select>
+	
+</mapper>

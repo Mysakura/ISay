@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.site.dao.TimeLineDAO">
+	
+	<resultMap type="TimeLine" id="timeLine">
+		<id column="tl_id" property="tlId"/>
+		<result column="tl_content" property="tlContent"/>
+		<result column="tl_time" property="tlTime"/>
+		<result column="editor_id" property="editor.userId"/>
+	</resultMap>
+	
+	<insert id="addTimeLine" parameterType="TimeLine">
+		insert into time_line values(#{tlId},#{tlContent},#{tlTime},#{editor.userId})
+	</insert>
+	
+	<update id="updateTimeLine" parameterType="TimeLine">
+		update time_line set tl_content = #{tlContent},editor_id = #{editor.userId} where tl_id = #{tlId}
+	</update>
+	
+	<delete id="deleteTimeLine">
+		delete from time_line where tl_id = #{tlId}
+	</delete>
+	
+	<select id="getTimeLineList" resultMap="timeLine">
+		select * from time_line
+	</select>
+</mapper>

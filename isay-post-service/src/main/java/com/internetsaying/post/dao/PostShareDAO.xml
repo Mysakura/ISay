@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.PostShareDAO">
+	<resultMap type="PostShare" id="postShare">
+		<id column="share_id" property="shareId"/>
+		<result column="post_id" property="postId"/>
+		<result column="post_content" property="postContent"/>
+		<result column="post_markdown" property="postMarkdown"/>
+		<result column="post_time" property="postTime"/>
+		<result column="author_id" property="user.userId"/>
+		<result column="modify_time" property="modifyTime"/>
+		<result column="is_delete" property="isDelete"/>
+	</resultMap>
+	
+	<insert id="addSharePost" parameterType="PostShare">
+		insert into post_share(post_id,post_content,post_markdown,author_id,post_time,modify_time)
+		values(#{postId},#{postContent},#{postMarkdown},#{user.userId},#{postTime},#{modifyTime})
+	</insert>
+	
+	<update id="updateSharePost" parameterType="PostShare">
+		update post_share
+		<set>
+			<if test="postContent != null">
+				post_content = #{postContent},
+			</if>
+			<if test="postMarkdown != null">
+				post_markdown = #{postMarkdown},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete},
+			</if>
+		</set>
+		where share_id = #{shareId}
+	</update>
+	
+	<select id="getContent" resultType="String">
+		select post_content from post_share where share_id = #{shareId}
+	</select>
+	
+	<select id="getPostModifyList" resultMap="postShare">
+		select share_id,author_id,modify_time from post_share where post_id = #{postId} order by modify_time desc
+	</select>
+	
+	<select id="getOwnShareToEdit" resultType="String">
+		select post_markdown from post_share where share_id = #{shareId}
+	</select>
+	
+	<select id="checkPostShare" resultType="int">
+		select count(*) from post_share where share_id = #{shareId} and author_id = #{authorId}
+	</select>
+	
+</mapper>

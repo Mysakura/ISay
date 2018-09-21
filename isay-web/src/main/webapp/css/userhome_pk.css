@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+.userhome-wrap{
+    margin-top: -35px !important;
+}
+.userhome-wrap .userhome-info{
+    margin-bottom: 15px;
+    border-radius: 3px;
+}
+
+.pk-wrap{
+    padding: 25px 0;
+}
+.pk-wrap .no-tip{
+    font-size: 18px;
+}
+.pk-common-friend{
+
+}
+.pk-common-friend .friend-info{
+    display: inline-block;
+    width: 100px;
+    padding: 10px;
+}
+.pk-common-friend .friend-info img{
+    width: 80px;
+    border-radius: 7px;
+}

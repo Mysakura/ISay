@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+.mofify-history{
+	position: fixed;
+	right: 0;
+	top: 140px;
+	height: 60%;
+	width: 270px;
+	background-color: #012d41;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 10px;
+    overflow-x: hidden;
+    z-index: 990;
+}
+.mofify-history > .title{
+	margin: 0 0 8px 0;
+	color: #97deff;
+}
+.mofify-history > .close-btn{
+	position: absolute;
+	top: 4px;
+    right: 4px;
+    cursor: pointer;
+    color: #fff;
+}
+.mofify-history > .close-btn:hover{
+    color: #ff2171;
+}
+.mofify-history ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.mofify-history ul li .author-span{
+	color: #fff;
+}
+.mofify-history ul li .author-info{
+	color: #76bfff;
+}
+.mofify-history ul li .look-history{
+	margin-right: 8px;
+	color: #76bfff;
+}
+.mofify-history ul li .go-modify{
+	margin-right: 8px;
+	color: #ef2e7d;
+}
+

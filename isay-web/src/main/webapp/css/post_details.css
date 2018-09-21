@@ -1,0 +1,197 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+/*pd:postDetails*/
+/*帖子头*/
+.pd-title{
+    color: #5d5d5d;
+    margin-top: 70px;
+}
+.pd-post-info{
+    font-size: 16px;
+    line-height: 25px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+.pd-post-info .info-item{
+    margin: 0 8px;
+}
+
+/*帖子尾*/
+.pd-tail{
+    font-size: 16px;
+}
+.pd-tail-operate{
+    border-top: 1px solid #ddd;
+    padding: 35px 0;
+    text-align: center;
+}
+.pd-tail-operate > a{
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #FF404E;
+    border-radius: 5px;
+}
+.pd-tail-operate > a:hover{
+    background-color: #e43744;
+}
+
+/*评论*/
+.pd-comment-wrap > h4{
+	font-weight: 700;
+}
+.pd-comment-wrap .user-info{
+
+}
+.pd-comment-wrap .user-info .user-photo{
+    float: left;
+    margin-right: 8px;
+}
+.pd-comment-wrap .user-info .user-photo > img{
+    width: 50px;
+    border-radius: 50%;
+}
+.pd-comment-wrap .user-info .user-extra{
+    display: inline-block;
+    line-height: 25px;
+}
+.pd-comment-wrap .user-info .user-extra > a{
+    display: block;
+}
+.pd-comment-wrap .user-info .user-extra > .comment-time{
+    display: block;
+    color: #949393;
+}
+.pd-comment-wrap .user-info .user-operate{
+    display: inline-block;
+    line-height: 25px;
+}
+.pd-comment-wrap .user-info .user-operate-btn{
+    display: inline-block;
+    color: #01984c;
+    margin-left: 15px;
+}
+.pd-comment-wrap .comment{
+    text-align: justify;
+    margin-top: 10px;
+    padding-left: 57px;
+    font-size: 16px;
+    color: #565656;
+}
+.pd-comment-wrap .comment-del{
+	color: #da4976;
+    font-weight: 700;
+}
+.pd-comment-wrap .show-reply{
+	text-decoration: none;
+    padding: 3px;
+    color: #ffffff;
+    background-color: #888888;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+.pd-comment-wrap .show-reply:hover{
+	background-color: #36a1c1;
+}
+
+/*回复*/
+.pd-reply-wrap{
+    margin-left: 57px;
+    margin-top: 15px;
+    padding: 8px 0;
+}
+.pd-reply-wrap .pd-reply{
+    padding: 8px 0;
+    border-top: 1px solid #ddd;
+}
+.pd-reply-wrap .reply-del{
+    color: #da4976 !important;
+    font-weight: 700;
+}
+.pd-reply-wrap .pd-reply > .user-info{
+
+}
+.pd-reply-wrap .pd-reply > .reply{
+    text-align: justify;
+    line-height: 25px;
+    color: #565656;
+}
+
+.pd-reply-wrap .pd-reply > .user-operate{
+    text-align: justify;
+    line-height: 25px;
+    color: #565656;
+}
+.pd-reply-wrap .pd-reply > .user-operate .reply-time{
+    color: #949393;
+    line-height: 25px;
+}
+.pd-reply-wrap .pd-reply > .user-operate .user-operate-btn{
+    margin-left: 15px;
+    color: #01984c;
+}
+
+/*评论输入*/
+.pd-release-comment-wrap{
+    background-color: #0290a7;
+}
+.pd-release-comment-wrap .comment-input{
+    min-height: 100px;
+    padding: 8px;
+    font-size: 16px;
+    color: #3E7087;
+    background-color: #fff;
+    border-radius: 3px;
+    outline: none;
+}
+.pd-release-comment-wrap .comment-input:empty:before{
+    content: attr(data-tip);
+    color: #bbb;
+}
+.pd-release-comment-wrap .comment-input:focus:before{
+    content: none;
+}
+.pd-release-comment-wrap .comment-tools{
+    padding-top: 15px;
+    line-height: 30px;
+}
+.pd-release-comment-wrap .comment-tools .tool-btn{
+    position: relative;
+    padding: 6px 8px;
+    color: #fff;
+    background-color: #0e6977;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.pd-release-comment-wrap .comment-tools .tool-btn:hover{
+    background-color: #0c5763;
+}
+.pd-release-comment-wrap .comment-tools .tool-btn input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    opacity: 0;
+}
+
+/*回复*/
+.pd-release-reply-wrap{
+    background-color: #fff !important;
+    border: none !important;
+}
+.pd-release-reply-wrap .reply-input{
+    outline-color: #07a6bf;
+    border: 1px solid #ddd;
+}
+
+/*内容里面的图片*/
+.mr-img{
+    width: 100px;
+    vertical-align: bottom;
+}

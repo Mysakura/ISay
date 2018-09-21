@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.sys-flag{
+	color: #bd0841;
+}
+.sys-user{
+	font-weight: 700;
+	margin-right: 15px;
+	font-size: 18px;
+}
+.sys-post{
+	font-weight: 700;
+	font-size: 17px;
+}
+.sys-content{
+	font-weight: 700;
+	margin: 0 15px;
+	font-size: 18px;
+    color: #777272;
+}
+.sys-time{
+	margin-left: 15px;
+	font-weight: 600;
+}

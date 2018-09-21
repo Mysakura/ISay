@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="dubbo-web-consumer"/>
+	
+	<dubbo:registry protocol="zookeeper" address="${dubbo.register.address}"/>
+	<dubbo:consumer timeout="${dubbo.timeout}"></dubbo:consumer>
+	
+	<dubbo:reference id="userService" interface="com.internetsaying.user.service.UserService"></dubbo:reference>
+	<dubbo:reference id="systemMsgService" interface="com.internetsaying.user.service.SystemMsgService"></dubbo:reference>
+	<dubbo:reference id="personalLetterService" interface="com.internetsaying.user.service.PersonalLetterService"></dubbo:reference>
+	<dubbo:reference id="fansService" interface="com.internetsaying.user.service.FansService"></dubbo:reference>
+	<dubbo:reference id="userCollectionService" interface="com.internetsaying.user.service.UserCollectionService"></dubbo:reference>
+	
+	<dubbo:reference id="aboutService" interface="com.internetsaying.site.service.AboutService"></dubbo:reference>
+	<dubbo:reference id="announcementService" interface="com.internetsaying.site.service.AnnouncementService"></dubbo:reference>
+	<dubbo:reference id="friendService" interface="com.internetsaying.site.service.FriendService"></dubbo:reference>
+	<dubbo:reference id="messageBoardService" interface="com.internetsaying.site.service.MessageBoardService"></dubbo:reference>
+	<dubbo:reference id="timeLineService" interface="com.internetsaying.site.service.TimeLineService"></dubbo:reference>
+	<dubbo:reference id="statisticsService" interface="com.internetsaying.site.service.StatisticsService"></dubbo:reference>
+	
+	<dubbo:reference id="areaService" interface="com.internetsaying.post.service.AreaService"></dubbo:reference>
+	<dubbo:reference id="chatService" interface="com.internetsaying.post.service.ChatService"></dubbo:reference>
+	<dubbo:reference id="classifyService" interface="com.internetsaying.post.service.ClassifyService"></dubbo:reference>
+	<dubbo:reference id="companyService" interface="com.internetsaying.post.service.CompanyService"></dubbo:reference>
+	<dubbo:reference id="postCommentService" interface="com.internetsaying.post.service.PostCommentService"></dubbo:reference>
+	<dubbo:reference id="postService" interface="com.internetsaying.post.service.PostService"></dubbo:reference>
+	<dubbo:reference id="throwPotService" interface="com.internetsaying.post.service.ThrowPotService"></dubbo:reference>
+	<dubbo:reference id="voteService" interface="com.internetsaying.post.service.VoteService"></dubbo:reference>
+	<dubbo:reference id="postShareService" interface="com.internetsaying.post.service.PostShareService"></dubbo:reference>
+	<dubbo:reference id="solrPostService" interface="com.internetsaying.post.service.SolrPostService"></dubbo:reference>
+	
+
+</beans>

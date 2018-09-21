@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.ChatDAO">
+	<resultMap type="Chat" id="chat">
+		<id column="chat_id" property="chatId"/>
+		<result column="chat_content" property="chatContent"/>
+		<result column="chat_time" property="chatTime"/>
+		<result column="chat_user_id" property="user.userId"/>
+		<result column="is_delete" property="isDelete"/>
+		<collection property="replies" column="chat_id" ofType="ChatReply" select="getReplies"></collection>
+	</resultMap>
+	<resultMap type="ChatReply" id="chatReply">
+		<id column="cr_id" property="replyId"/>
+		<result column="cr_content" property="replyContent"/>
+		<result column="cr_time" property="replyTime"/>
+		<result column="cr_chat_id" property="chat.chatId"/>
+		<result column="from_user_id" property="replyUser.userId"/>
+		<result column="to_user_id" property="targetUser.userId"/>
+		<result column="is_delete" property="isDelete"/>
+	</resultMap>
+	
+	<sql id="chatFields">chat_id,chat_content,chat_time,chat_user_id</sql>
+	<sql id="replyFields">cr_id,cr_content,cr_time,cr_chat_id,from_user_id,to_user_id</sql>
+	
+	<insert id="addChat">
+		insert into chat(<include refid="chatFields"/>) values(#{chatId},#{chatContent},#{chatTime},#{user.userId})
+	</insert>
+	
+	<update id="deleteChat">
+		update chat set is_delete = '1' where chat_id = #{chatId}
+	</update>
+	
+	<select id="getChats" resultMap="chat">
+		select * from chat order by chat_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getChatsPersonally" resultMap="chat">
+		select * from chat where chat_user_id = #{userId} order by chat_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<insert id="addChatReply">
+		insert into chat_reply(<include refid="replyFields"/>) values(#{replyId},#{replyContent},#{replyTime},#{chat.chatId},#{replyUser.userId},#{targetUser.userId})
+	</insert>
+	
+	<update id="deleteChatReply">
+		update chat_reply set is_delete = '1' where cr_id = #{replyId}
+	</update>
+	
+	<select id="getReplies" resultMap="chatReply">
+		select * from chat_reply where cr_chat_id = #{chatId}
+	</select>
+	
+	<select id="getChatCount" resultType="int">
+		select count(*) from chat
+	</select>
+	
+	<select id="getChatCountPersonally" resultType="int">
+		select count(*) from chat where chat_user_id = #{userId}
+	</select>
+	
+	<select id="checkUserChat" resultType="int">
+		select count(*) from chat where chat_user_id = #{userId} and chat_id = #{chatId}
+	</select>
+	
+	<select id="checkUserChatReply" resultType="int">
+		select count(*) from chat_reply where from_user_id = #{userId} and cr_id = #{replyId}
+	</select>
+	
+	<select id="getUserIdsOfChatReply" resultType="String">
+		(select from_user_id u from chat_reply where cr_chat_id in
+		<foreach collection="cIds" item="id" open="(" separator="," close=")">#{id}</foreach>)
+		union
+		(select to_user_id u from chat_reply where cr_chat_id in
+		<foreach collection="cIds" item="id" open="(" separator="," close=")">#{id}</foreach>)
+	</select>
+	
+</mapper>

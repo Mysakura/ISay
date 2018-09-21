@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+/*侧边菜单*/
+.side-menu{
+    position: absolute;
+    left: 0;
+    width: 220px;
+    min-height: 700px;
+    height: 100%;
+    background-color: #122b40;
+    padding: 25px;
+}
+.side-menu .title{
+    color: #DAECF3;
+    padding: 0 0 15px;
+    border-bottom: 1px solid;
+}
+.side-menu a{
+    color: #DAECF3;
+    font-size: 14px;
+    line-height: 30px;
+}
+.side-menu .active{
+    color: #1BA5B8;
+}
+
+.side-menu .write-post-link{
+    text-align: center;
+    padding: 8px 0;
+    border-top: 1px solid #DAECF3;
+}
+.side-menu .write-post-link > a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 4px 8px;
+}
+.side-menu .write-post-link > a:hover{
+    border-radius: 3px;
+    background-color: #DAECF3;
+    color: #122b40;
+}
+.side-menu .write-post-link p{
+    text-align: left;
+    color: #69c56a;
+}
+
+
+/*主要内容*/
+.main-content{
+    padding: 15px 15px 15px 245px;
+    min-height: 1200px;
+}
+
+/*通用样式*/
+.main-content .post-wrap{
+    margin-top: 25px;
+}
+.main-content .post-item{
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.main-content .post-item .post-img{
+    height: 115px;
+    margin-left: 40px;
+}
+.main-content .post-item .post-p{
+    font-size: 16px;
+    text-align: justify;
+}
+.main-content .post-item .post-p:first-letter{
+    font-size: 25px;
+}
+.main-content .post-item .post-span{
+    display: inline-block;
+    margin-right: 10px;
+}
+.main-content .post-item .pull-right{
+    line-height: 30px !important;
+}
+/*加载更多*/
+.load-more{
+    display: inline-block;
+    padding: 10px 40px;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+.load-more:hover{
+    color: #fff;
+    background-color: #FF404E;
+    border: 1px solid #FF404E;
+}
+.load-more:focus{
+    color: #fff;
+    background-color: #FF404E;
+    border: 1px solid #FF404E;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-content{
+        padding: 15px;
+    }
+}

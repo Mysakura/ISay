@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+/*关注&粉丝*/
+
+.ff-pic{
+    margin-right: 8px;
+    text-decoration: none;
+}
+.ff-pic > img{
+    width: 50px;
+    border-radius: 50%;
+}
+.ff-job{
+    margin-left: 8px;
+}
+.ff-time{
+    float: right;
+    line-height: 42px;
+    color: #1BA5B8;
+}

@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+/*取消收藏帖子*/
+
+.cancel-collect-post{
+	color: #e04242;
+	font-weight: 600;
+}
+.cancel-collect-post:hover{
+	color: #e04242;
+}

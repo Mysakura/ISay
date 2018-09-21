@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.internetsaying</groupId>
+		<artifactId>isay-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>isay-web</artifactId>
+	<packaging>war</packaging>
+	
+	<properties>
+		<solr.version>7.1.0</solr.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.internetsaying</groupId>
+			<artifactId>isay-utils</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.internetsaying</groupId>
+			<artifactId>isay-user-facade</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.internetsaying</groupId>
+			<artifactId>isay-post-facade</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.internetsaying</groupId>
+			<artifactId>isay-site-facade</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-solr 
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-solr</artifactId>
+		    <version>${spring-data-solr.version}</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<groupId>org.apache.solr</groupId>
+		    		<artifactId>solr-solrj</artifactId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		-->
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-solrj -->
+		<dependency>
+		    <groupId>org.apache.solr</groupId>
+		    <artifactId>solr-solrj</artifactId>
+		    <version>${solr.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.solr/solr-core -->
+		<dependency>
+		    <groupId>org.apache.solr</groupId>
+		    <artifactId>solr-core</artifactId>
+		    <version>${solr.version}</version>
+		    <exclusions>
+		    	<exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+		    	<exclusion>
+		    		<groupId>log4j</groupId>
+		    		<artifactId>log4j</artifactId>
+		    	</exclusion>
+		    	<!-- 因为Hadoop依赖这个狗东西，Missing artifact jdk.tools:jdk.tools:jar:1.8 -->
+		    	<exclusion>
+		    		<groupId>org.apache.hadoop</groupId>
+		    		<artifactId>hadoop-annotations</artifactId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		
+	</dependencies>
+	
+	<build>
+		<finalName>isay-web</finalName>
+	</build>
+	
+</project>

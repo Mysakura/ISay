@@ -1,0 +1,67 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+.company-search-input{
+    width: 150px;
+    height: 30px;
+    text-indent: 4px;
+    outline-color: #1CA5B8;
+    border: 1px solid #122b40;
+    border-radius: 3px;
+}
+
+/*公司列表*/
+.already-exist{
+    cursor: pointer;
+}
+.exist-list{
+    min-height: 100px;
+    max-height: 300px;
+    overflow-x: hidden;
+    display: none;
+}
+.exist-list a{
+    display: inline-block;
+    padding: 8px;
+}
+
+/*具体公司*/
+.company-evaluate{
+    margin: 15px 0;
+    display: none;
+}
+.company-evaluate a{
+    display: inline-block;
+    padding: 4px 8px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #FF404E;
+    border-radius: 3px;
+}
+.company-evaluate a:hover{
+    background-color: #e43a47;
+}
+.company-evaluate .e-num{
+    display: block;
+    color: #fff;
+    text-align: center;
+}
+
+
+.company-labels{
+    border-top: 1px solid #ddd;
+    padding: 8px 0;
+}
+.company-labels .company-labels-item{
+    display: inline-block;
+    margin-right: 8px;
+    padding: 8px 20px;
+    border-radius: 3px;
+    color: #fff;
+}
+.company-labels .c-ok{
+    background-color: #1d598c;
+}
+.company-labels .c-bad{
+    background-color: #737f07;
+}

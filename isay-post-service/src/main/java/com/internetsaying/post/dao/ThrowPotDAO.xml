@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.ThrowPotDAO">
+	<resultMap type="ThrowPotDetail" id="throwPotDetail">
+		<id column="tpd_id" property="detailId"/>
+		<result column="user_id" property="user.userId"/>
+		<result column="gift" property="gift"/>
+		<result column="tpd_time" property="time"/>
+		<association column="to_area_id" property="targetArea" javaType="WorkArea">
+			<id column="area_id" property="areaId"/>
+			<result column="area_name" property="areaName"/>
+		</association>
+	</resultMap>
+	<resultMap type="ThrowPot" id="throwPot">
+		<id column="pot_area_id" property="workArea.areaId"/>
+		<result column="flower_num" property="flowerNum"/>
+		<result column="hammer_num" property="hammerNum"/>
+		<result column="pot_num" property="potNum"/>
+		<result column="agent_num" property="agentNum"/>
+		<result column="hat_num" property="hatNum"/>
+	</resultMap>
+	
+	<!-- 收到礼物的情况 -->
+	<resultMap type="AreaReceiveNum" id="areaReceive">
+		<result column="area_name" property="areaName"/>
+		<result column="gift_num" property="giftNum"/>
+	</resultMap>
+	
+	<select id="getThrowPotByArea" resultMap="throwPot">
+		select * from throw_pot where pot_area_id = #{areaId}
+	</select>
+	
+	<select id="getReceiveDetail" resultMap="areaReceive">
+		select area_name,count(*) gift_num from work_area left join throw_pot_detail on from_area_id = area_id where to_area_id = #{areaId} and gift = #{giftId} group by from_area_id
+	</select>
+	
+	<insert id="addThrowPotDetail" parameterType="ThrowPotDetail">
+		insert into throw_pot_detail(user_id,from_area_id,to_area_id,gift,tpd_time) values(#{user.userId},#{workArea.areaId},#{targetArea.areaId},#{gift},#{time})
+	</insert>
+	
+	<select id="getDetailListByArea" resultMap="throwPotDetail">
+		select user_id,gift,tpd_time,area_id,area_name from throw_pot_detail left join work_area on to_area_id = area_id where from_area_id = #{areaId} order by tpd_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+</mapper>

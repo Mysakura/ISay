@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.user.dao.UserDAO">
+	<resultMap type="User" id="user">
+		<id column="user_id" property="userId"/>
+		<result column="user_email" property="userEmail"/>
+		<result column="password" property="password"/>
+		<result column="user_name" property="nickname"/>
+		<result column="user_sex" property="sex"/>
+		<result column="user_photo" property="userPhoto"/>
+		<result column="user_bg" property="userBg"/>
+		<result column="user_graduate" property="userGraduate"/>
+		<result column="user_alipay" property="userAlipay"/>
+		<result column="user_vxin" property="userVxin"/>
+		<result column="user_job" property="job"/>
+		<result column="user_company" property="company"/>
+		<result column="work_place" property="workplace"/>
+		<result column="user_shield" property="shield"/>
+		<!-- column要传递的数据库字段 -->
+		<collection property="roles" column="user_id" javaType="java.util.List"
+			ofType="Role" select="getUserRoles">
+		</collection>
+	</resultMap>
+	<resultMap type="Role" id="role">
+		<id column="role_id" property="roleId"/>
+		<result column="role_name" property="roleName"/>
+	</resultMap>
+	
+	
+	<select id="getUserRoles" resultMap="role">
+		select * from role where role_id in(select role_id from user_role where user_id = #{userId});
+	</select>
+	
+	<sql id="fields">
+		user_id,user_email,password,user_name
+	</sql>
+	
+	<select id="getUserForLogin" resultMap="user">
+		select * from user where user_email = #{userEmail} and password = #{password}
+	</select>
+	
+	<select id="getUserById" resultMap="user">
+		select * from user where user_id = #{userId}
+	</select>
+	
+	<insert id="addUser" parameterType="User">
+		insert into user(<include refid="fields"/>) values(#{userId},#{userEmail},#{password},#{nickname})
+	</insert>
+	
+	<update id="updateUser" parameterType="User">
+		update user
+		<set>
+			<if test="nickname != null">
+				user_name = #{nickname},
+			</if>
+			<if test="sex != null">
+				user_sex = #{sex},
+			</if>
+			<if test="userGraduate != null">
+				user_graduate = #{userGraduate},
+			</if>
+			<if test="job != null">
+				user_job = #{job},
+			</if>
+			<if test="company != null">
+				user_company = #{company},
+			</if>
+			<if test="workplace != null">
+				work_place = #{workplace},
+			</if>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="userPhoto != null">
+				user_photo = #{userPhoto},
+			</if>
+			<if test="userBg != null">
+				user_bg = #{userBg},
+			</if>
+			<if test="userAlipay != null">
+				user_alipay = #{userAlipay},
+			</if>
+			<if test="userVxin != null">
+				user_vxin = #{userVxin},
+			</if>
+			<if test="shield != null">
+				user_shield = #{shield}
+			</if>
+		</set>
+		where user_id = #{userId}
+	</update>
+	
+	<select id="checkEmail" resultType="int">
+		select count(*) from user where user_email = #{email}
+	</select>
+	
+	<select id="checkNickName" resultType="int">
+		select count(*) from user where user_name = #{nickname}
+	</select>
+	
+	<resultMap type="User" id="simpleUser">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="nickname"/>
+		<result column="user_photo" property="userPhoto"/>
+	</resultMap>
+	
+	<select id="getSpecificUsers" resultMap="simpleUser">
+		select user_id,user_name,user_photo from user where user_id in
+		<!-- item:每一个元素迭代时的别名，open:语句以什么开始，separator:分隔符，close:语句以什么结束 -->
+		<foreach collection="idList" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<select id="getSpecificUsersMap" resultMap="simpleUser">
+		select user_id,user_name,user_photo from user where user_id in
+		<foreach collection="idSet" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<select id="getUserCount" resultType="int">
+		select count(*) from user
+	</select>
+	
+	<select id="getUserList" resultMap="user">
+		select * from user limit #{pageNo},#{pageSize}
+	</select>
+</mapper>

@@ -1,0 +1,72 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+/*设置*/
+
+.us-upload-btn{
+    display: inline-block;
+    padding: 8px;
+    position: relative;
+    color: #fff !important;
+    text-decoration: none !important;
+    background-color: #419641;
+    border-radius: 3px;
+}
+.us-upload-btn:hover{
+    background-color: #2d8e2d !important;
+}
+.us-upload-input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    opacity: 0;
+}
+.us-pay-pic{
+    margin: 15px auto;
+    display: block;
+    width: 150px;
+    /*float: right;*/
+}
+
+/*性别样式*/
+.sex-wrap{
+    display: inline-block;
+    width: 90px;
+    color: #6b6b6b;
+}
+
+/*Jcrop相关*/
+.preview-wrap{
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+.preview-50{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.preview-50-img{
+    width: 50px;
+    height: 50px;
+}
+.preview-150{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.preview-150-img{
+    width: 150px;
+    height: 150px;
+}
+
+.us-jcrop-wrap{
+    width: 404px;
+    height: 404px;
+    border: 2px solid #cccccc;
+    background-color: #efefef;
+    overflow: hidden;
+    margin-bottom: 15px;
+}

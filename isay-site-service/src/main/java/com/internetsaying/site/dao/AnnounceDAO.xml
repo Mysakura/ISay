@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.site.dao.AnnounceDAO">
+
+	<resultMap type="Announcement" id="announce">
+		<id column="ann_id" property="annId"/>
+		<result column="ann_title" property="annTitle"/>
+		<result column="ann_content" property="annContent"/>
+		<result column="ann_markdown" property="annMarkdown"/>
+		<result column="ann_time" property="annTime"/>
+		<result column="editor_id" property="annEditor.userId"/>
+		<!-- 这些可以由上面一句话代替 
+		<association property="annEditor" column="editor_id" javaType="com.internetsaying.user.entity.User">
+			<id column="editor_id" property="userId"/>
+		</association>
+		-->
+	</resultMap>
+
+	<insert id="addAnnouncement" parameterType="Announcement">
+		insert into announcement values(#{annId},#{annTitle},#{annContent},
+		#{annMarkdown},#{annEditor.userId},#{annTime})
+	</insert>
+	
+	<update id="updateAnnouncement" parameterType="Announcement">
+		update announcement set
+		ann_content = #{annContent},ann_markdown = #{annMarkdown},
+		ann_time = #{annTime},editor_id = #{annEditor.userId}
+		where ann_id = #{annId}
+	</update>
+	
+	<delete id="deleteAnnouncement">
+		delete from announcement where ann_id = #{annId}
+	</delete>
+	
+	<select id="getAnnouncement" resultMap="announce">
+		select * from announcement where ann_id = #{annId}
+	</select>
+	
+	<select id="getAnnouncementList" resultMap="announce">
+		select * from announcement order by ann_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getAnnouncementCount" resultType="int">
+		select count(*) from announcement
+	</select>
+</mapper>

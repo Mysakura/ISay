@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="1800">
+	
+	<Filter type="ThresholdFilter" level="trace"/>
+	
+  	<Appenders>
+  		<Console name="console" target="SYSTEM_OUT">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+    		<PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+    	</Console>
+    	<RollingFile name="rollingFileSys" fileName="/Isay/logs/web.log" append="true"
+                 filePattern="/Isay/logs/web/$${date:yyyy-MM-dd}/log-%d{yyyy-MM-dd HH}-%i.log.gz">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+    		<PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss,SSS} %-5level %class{36} [行数%L] [方法%M] - %msg%xEx%n"/>    
+      		<SizeBasedTriggeringPolicy size="50 M" />
+    	
+      		<!-- DefaultRolloverStrategy set the max file number in the log dir -->
+      		<DefaultRolloverStrategy max="20" />
+    	</RollingFile>
+    	<!--  
+    	<RollingFile name="rollingFileUser" fileName="${web:rootDir}/WEB-INF/logs/user.log" append="true"
+                 filePattern="${web:rootDir}/WEB-INF/logs/user/$${date:yyyy-MM-dd}/log-%d{yyyy-MM-dd HH}-%i.log.gz">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+    		<PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss,SSS} %-5level %class{36} [行数%L] [方法%M] - %msg%xEx%n"/>    
+      		<SizeBasedTriggeringPolicy size="1 M" />
+      		<DefaultRolloverStrategy max="20" />
+    	</RollingFile>
+    	<RollingFile name="rollingFileIP" fileName="${web:rootDir}/WEB-INF/logs/ip.log" append="true"
+                 filePattern="${web:rootDir}/WEB-INF/logs/ip/$${date:yyyy-MM-dd}/log-%d{yyyy-MM-dd HH}-%i.log.gz">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+    		<PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss,SSS} %-5level - %msg%xEx%n"/>    
+      		<SizeBasedTriggeringPolicy size="1 M" />
+      		<DefaultRolloverStrategy max="20" />
+    	</RollingFile>
+    	-->
+  	</Appenders>
+  	<Loggers>
+    	<Root level="WARN">
+    		<!-- TRACE < DEBUG < INFO < WARN < ERROR < FATAL
+      		<AppenderRef ref="rollingFileSys"/>
+    		-->
+    		<AppenderRef ref="console"/>
+    	</Root>
+    	<Logger name="com.internetsaying" level="INFO">
+      		<AppenderRef ref="rollingFileSys"/>
+	    </Logger>
+    	<!--  
+    	<Logger name="org.springframework" level="WARN">
+      		<AppenderRef ref="console"/>
+	    </Logger>
+    	-->
+  	</Loggers>
+</Configuration>

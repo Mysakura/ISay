@@ -1,0 +1,149 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+/*消息列表*/
+.u-msg-wrap{
+    overflow: hidden;
+}
+.u-msg-wrap .go-detail{
+    margin-left: 8px;
+}
+.u-msg-wrap{
+    overflow: hidden;
+}
+
+
+
+/*具体某个人的消息*/
+.u-msg-detail{
+    color: #fff;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.u-msg-detail .other{
+    margin: 0 80px 0 15px;
+    position: relative;
+}
+.u-msg-detail .other > .content{
+    display: inline-block;
+    background-color: #0a3244;
+    padding: 8px;
+    border-radius: 5px;
+}
+.u-msg-detail .other > .triangle{
+    color: #0a3244;
+    position: absolute;
+    left: -10px;
+    top: 10px;
+}
+
+.u-msg-detail .me{
+    margin: 0 15px 15px 80px;
+    position: relative;
+}
+.u-msg-detail .me > .content{
+    float: right;
+    background-color: #FF404E;
+    padding: 8px;
+    border-radius: 5px;
+}
+.u-msg-detail .me > .triangle{
+    color: #FF404E;
+    position: absolute;
+    right: -9px;
+    top: 10px;
+}
+
+.u-msg-detail .time{
+    color: #419641;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/*选择某天的操作*/
+.u-msg-select{
+    text-align: center;
+}
+
+/*回复私信*/
+.u-msg-reply .reply-content{
+    border-radius: 3px;
+    color: #757373;
+    background-color: #fff;
+    line-height: 25px;
+    font-size: 16px;
+    text-align: justify;
+    min-height: 100px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #ddd;
+}
+.u-msg-reply .reply-content:empty:before{
+    content: attr(data-tip);
+    color: #b5b5b5;
+}
+.u-msg-reply .reply-content:focus:before{
+    content: none;
+}
+.u-msg-reply .reply-btn{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 20px;
+    background-color: #ff4f4f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+}
+.u-msg-reply .reply-btn:hover{
+    background-color: #ef4a4a;
+}
+.u-msg-reply .reply-btn:active{
+    background-color: #dc4444;
+}
+
+/*私信时间轴*/
+.u-msg-line{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 50px 25px;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 9999;
+    overflow-x: hidden;
+    display: none;
+}
+.u-msg-line .time-point{
+    display: inline-block;
+    padding: 8px;
+    color: #cbde2f;
+    text-align: left;
+}
+.u-msg-line .time-point > .l-t{
+    margin-right: 8px;
+}
+.u-msg-line .time-point > .r-n{
+    margin-left: 8px;
+}
+.u-msg-line .time-point .child-time-btn{
+    cursor: pointer;
+}
+
+.u-msg-line .time-point .child-time-list{
+    padding-left: 86px;
+    text-align: left;
+}
+.u-msg-line .time-point .child-time-list > .child-time-point{
+    padding: 8px;
+    color: #32c7c7;
+}
+.u-msg-line .time-point .child-time-list > .child-time-point > .l-t{
+    font-size: 20px;
+    margin-right: 5px;
+}
+.u-msg-line .time-point .child-time-list > .child-time-point > .r-n{
+    text-decoration: underline;
+    color: #32c7c7;
+}

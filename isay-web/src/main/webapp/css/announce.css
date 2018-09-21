@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+
+.announce-add-padding{
+    padding-top: 100px;
+    padding-bottom: 25px;
+}
+.announce-add-margin{
+    margin-bottom: 100px;
+}

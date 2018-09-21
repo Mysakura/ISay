@@ -1,0 +1,62 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+/*mb:messageBoard*/
+/*tl：timeline*/
+
+.tl-add-padding{
+    padding-top: 100px;
+    padding-bottom: 25px;
+}
+
+.tl-wrap{
+    min-height: 500px;
+    padding: 15px;
+    margin-bottom: 100px;
+    /*box-shadow: 0 1px 10px #abaaaa;*/
+    overflow: hidden;
+}
+
+.tl-top-line{
+    height: 6px;
+    background-size: 12px;
+    background-repeat: repeat-x;
+    background-image: url("icon/time-horizon.png");
+}
+.tl-content-wrap{
+    background-size: 6px;
+    background-repeat: repeat-y;
+    background-image: url("icon/time.png");
+    background-position: 25%;
+    width: 100%;
+    /*border-top: 5px solid #f36078;*/
+    padding-top: 30px;
+}
+.tl-content-item{
+    margin-bottom: 30px;
+}
+.tl-content{
+    position: relative;
+}
+.tl-content .tl-year{
+    font-size: 16px;
+    color: #868686;
+    display: block;
+}
+.tl-content .tl-date{
+    font-size: 30px;
+    color: #FF404E;
+}
+.tl-content .tl-point{
+    background-image: url("icon/time-point.png");
+    background-size: cover;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: -18px;
+    top: 20px;
+}
+.tl-event{
+    padding-left: 15px;
+    font-size: 18px;
+    color: #656565;
+}

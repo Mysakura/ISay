@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.user.dao.FansDAO">
+	
+	
+	
+	<insert id="addFans" parameterType="Fans">
+		insert into fans(master_id,follower_id,time) values(#{masterId},#{followerId},#{time})
+	</insert>
+	
+	<select id="getFocus" resultType="com.internetsaying.user.dto.FansDTO">
+		select u.user_id userId,u.user_name nickname,u.user_photo userPhoto,u.user_job job,f.time time
+		from fans f left join user u on f.master_id = u.user_id where f.follower_id = #{userId} order by f.time desc limit #{limitStart},#{pageSize}
+	</select>
+	<select id="getFans" resultType="com.internetsaying.user.dto.FansDTO">
+		select u.user_id userId,u.user_name nickname,u.user_photo userPhoto,u.user_job job,f.time time
+		from fans f left join user u on f.follower_id = u.user_id where f.master_id = #{userId} order by f.time desc limit #{limitStart},#{pageSize}
+	</select>
+	<select id="countFocus" resultType="int">
+		select count(*) from fans where follower_id = #{userId}
+	</select>
+	<select id="countFans" resultType="int">
+		select count(*) from fans where master_id = #{userId}
+	</select>
+	<select id="checkRelation" resultType="int">
+		select count(*) from fans where master_id = #{userB} and follower_id = #{userA}
+	</select>
+	<delete id="deleteRelation">
+		delete from fans where master_id = #{userB} and follower_id = #{userA}
+	</delete>
+	
+</mapper>

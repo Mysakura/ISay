@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.PostCommentDAO">
+	
+	<resultMap type="PostComment" id="comment">
+		<id column="comment_id" property="commentId"/>
+		<result column="comment_content" property="commentContent"/>
+		<result column="comment_time" property="commentTime"/>
+		<result column="user_id" property="user.userId"/>
+		<result column="post_id" property="post.postId"/>
+		<result column="reply_num" property="replyNum"/>
+		<result column="is_delete" property="isDelete"/>
+	</resultMap>
+	<resultMap type="PostReply" id="reply">
+		<id column="reply_id" property="replyId"/>
+		<result column="reply_content" property="replyContent"/>
+		<result column="reply_time" property="replyTime"/>
+		<result column="from_user_id" property="replyUser.userId"/>
+		<result column="to_user_id" property="targetUser.userId"/>
+		<result column="comment_id" property="postComment.commentId"/>
+		<result column="is_delete" property="isDelete"/>
+	</resultMap>
+	
+	<insert id="addPostComment" parameterType="PostComment">
+		insert into post_comment(comment_id,comment_content,comment_time,post_id,user_id) values(#{commentId},#{commentContent},#{commentTime},#{post.postId},#{user.userId})
+	</insert>
+	
+	<update id="updatePostComment" parameterType="PostComment">
+		update post_comment set is_delete = #{isDelete} where comment_id = #{commentId}
+	</update>
+	
+	<select id="checkCommentOwner" resultType="int">
+		select count(*) from post_comment where comment_id = #{commentId} and user_id = #{userId}
+	</select>
+	
+	<select id="getPostCommentList" resultMap="comment">
+		select * from post_comment where post_id = #{postId} order by comment_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<insert id="addPostReply" parameterType="PostReply">
+		insert into post_reply(reply_id,reply_content,reply_time,from_user_id,to_user_id,comment_id)
+		values(#{replyId},#{replyContent},#{replyTime},#{replyUser.userId},#{targetUser.userId},#{postComment.commentId})
+	</insert>
+	
+	<update id="updatePostReply" parameterType="PostReply">
+		update post_reply set is_delete = #{isDelete} where reply_id = #{replyId}
+	</update>
+	
+	<select id="checkReplyOwner" resultType="int">
+		select count(*) from post_reply where reply_id = #{replyId} and from_user_id = #{userId}
+	</select>
+	
+	<select id="getCommentReplyList" resultMap="reply">
+		select * from post_reply where comment_id = #{commentId} limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getAllCommentCount" resultType="int">
+		select count(*) from post_comment
+	</select>
+	
+	<select id="getCommentCount" resultType="int">
+		select count(*) from post_comment where post_id = #{postId}
+	</select>
+	
+	<select id="getReplyCount" resultType="int">
+		select count(*) from post_reply where comment_id = #{commentId}
+	</select>
+	
+	<select id="getPostIdById" resultType="String">
+		select post_id from post_comment where comment_id = #{commentId}
+	</select>
+	
+</mapper>

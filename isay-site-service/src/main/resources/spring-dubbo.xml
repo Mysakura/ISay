@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="dubbo-site-service"/>
+	
+	<dubbo:registry protocol="zookeeper" address="${dubbo.register.address}"/>
+	<dubbo:protocol name="dubbo" port="${dubbo.register.port}"/>
+	<dubbo:provider timeout="${dubbo.timeout}"></dubbo:provider>
+	
+	<!-- Provider -->
+	<bean id="aboutService" class="com.internetsaying.site.service.impl.AboutServiceImpl"></bean>
+	<bean id="announcementService" class="com.internetsaying.site.service.impl.AnnouncementServiceImpl"></bean>
+	<bean id="friendService" class="com.internetsaying.site.service.impl.FriendServiceImpl"></bean>
+	<bean id="messageBoardService" class="com.internetsaying.site.service.impl.MessageBoardServiceImpl"></bean>
+	<bean id="timeLineService" class="com.internetsaying.site.service.impl.TimeLineServiceImpl"></bean>
+	<bean id="statisticsService" class="com.internetsaying.site.service.impl.StatisticsServiceImpl"></bean>
+	
+	<dubbo:service interface="com.internetsaying.site.service.AboutService" ref="aboutService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.site.service.AnnouncementService" ref="announcementService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.site.service.FriendService" ref="friendService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.site.service.MessageBoardService" ref="messageBoardService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.site.service.TimeLineService" ref="timeLineService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.site.service.StatisticsService" ref="statisticsService"></dubbo:service>
+	
+	<!-- Consumer -->
+	<dubbo:reference id="userService" interface="com.internetsaying.user.service.UserService"></dubbo:reference>
+	<dubbo:reference id="postStatisticsFacade" interface="com.internetsaying.post.service.PostStatisticsFacade"></dubbo:reference>
+	
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.site.dao.FriendDAO">
+	
+	<resultMap type="FriendLink" id="friend">
+		<id column="fl_id" property="flId"/>
+		<result column="fl_name" property="flName"/>
+		<result column="fl_url" property="flUrl"/>
+		<result column="fl_ok" property="flOk"/>
+		<result column="fl_user_id" property="flUser.userId"/>
+		<result column="fl_admin_id" property="flAdmin.userId"/>
+		<result column="fl_time" property="flTime"/>
+	</resultMap>
+	
+	<sql id="cols">fl_id,fl_name,fl_url,fl_user_id,fl_time</sql>
+	
+	<insert id="addFriend" parameterType="FriendLink">
+		insert into friend_link(<include refid="cols"/>) values(#{flId},#{flName},#{flUrl},#{flUser.userId},#{flTime})
+	</insert>
+	
+	<select id="checkExist" parameterType="FriendLink" resultType="int">
+		select count(*) from friend_link where fl_url = #{flUrl} and fl_name = #{flName} and fl_user_id = #{flUser.userId}
+	</select>
+	
+	<update id="updateFriend" parameterType="FriendLink">
+		update friend_link set
+		fl_ok = #{flOk},fl_admin_id = #{flAdmin.userId}
+		where fl_id = #{flId}
+	</update>
+	
+	<delete id="deleteFriend">
+		delete from friend_link where fl_id = #{flId}
+	</delete>
+	
+	<select id="getFriendLinkList" resultMap="friend">
+		select * from friend_link order by fl_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getFriendLinkListOfType" resultMap="friend">
+		select * from friend_link where fl_ok = #{flOk} order by fl_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getFriendLinkCount" resultType="int">
+		select count(*) from friend_link
+	</select>
+	
+	<select id="getFriendLinkCountOfType" resultType="int">
+		select count(*) from friend_link where fl_ok = #{flOk}
+	</select>
+	
+</mapper>

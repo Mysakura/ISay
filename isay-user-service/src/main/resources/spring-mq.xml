@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:core="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.3.xsd">
+
+	<!-- Spring提供的ConnectionFactory只是Spring用于管理ConnectionFactory的，
+		   真正产生到JMS服务器链接的ConnectionFactory还得是由JMS服务厂商提供，并且需要把它注入到Spring提供的ConnectionFactory中。 
+		   -->
+	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${activemq.brokerUrl}"></property>
+		<property name="userName" value="${activemq.userName}"></property>
+		<property name="password" value="${activemq.password}"></property>
+	</bean>
+
+	<!-- ActiveMQ为我们提供了一个PooledConnectionFactory，通过往里面注入一个ActiveMQConnectionFactory
+		  可以用来将Connection、Session和MessageProducer池化，这样可以大大的减少我们的资源消耗。 
+		  -->
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="connectionFactory" ref="activeMQConnectionFactory"></property>
+		<property name="maxConnections" value="${activemq.pool.maxConnection}"></property>
+	</bean>
+	
+	<!--  ConnectionFactory是用于产生到JMS服务器的链接的，Spring为我们提供了多个ConnectionFactory，有SingleConnectionFactory和CachingConnectionFactory。
+		  SingleConnectionFactory对于建立JMS服务器链接的请求会一直返回同一个链接，并且会忽略Connection的close方法调用。
+		  CachingConnectionFactory继承了SingleConnectionFactory，所以它拥有SingleConnectionFactory的所有功能，同时它还新增了缓存功能，它可以缓存Session、MessageProducer和MessageConsumer。 
+		  -->
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="pooledConnectionFactory"></property>
+	</bean>
+	
+	<!-- 	在真正利用JmsTemplate进行消息发送的时候，我们需要知道消息发送的目的地，即destination。
+			在Jms中有一个用来表示目的地的Destination接口，它里面没有任何方法定义，只是用来做一个标识而已。
+			当我们在使用JmsTemplate进行消息发送时没有指定destination的时候将使用默认的Destination。
+			默认Destination可以通过在定义jmsTemplate bean对象时通过属性defaultDestination或defaultDestinationName来进行注入，
+			defaultDestinationName对应的就是一个普通字符串。在ActiveMQ中实现了两种类型的Destination，
+			一个是点对点的ActiveMQQueue，另一个就是支持订阅/发布模式的ActiveMQTopic。
+			在定义这两种类型的Destination时我们都可以通过一个name属性来进行构造 -->
+	
+	<!-- 定义消息队列 -->
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>${activemq.queueName}</value>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 私信 -->
+	<bean id="personalLetterDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>${activemq.queueName1}</value>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 定义主题 -->
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg>
+			<value>${activemq.topicName}</value>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 配置JMS模板，Spring提供的JMS工具类，它发送、接收消息。 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+	
+		<!--  
+		<property name="defaultDestinationName" value="${activemq.queueName}"></property>
+		-->
+		
+		<property name="defaultDestination" ref="queueDestination"></property>
+	</bean>
+
+</beans>

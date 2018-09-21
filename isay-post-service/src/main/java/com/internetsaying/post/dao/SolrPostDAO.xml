@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.SolrPostDAO">
+	
+	<insert id="addSolrPost" parameterType="SolrPost">
+		insert into solr_post(sp_id,sp_title,sp_content,sp_cover,sp_time)
+		values(#{spId},#{spTitle},#{spContent},#{spCover},#{spTime})
+	</insert>
+	
+	<update id="updateSolrPost" parameterType="SolrPost">
+		update solr_post
+		<set>
+			<if test="spTitle != null">
+				sp_title = #{spTitle},
+			</if>
+			<if test="spContent != null">
+				sp_content = #{spContent},
+			</if>
+			<if test="spCover != null">
+				sp_cover = #{spCover},
+			</if>
+			<if test="spTime != null">
+				sp_time = #{spTime}
+			</if>
+		</set>
+		where sp_id = #{spId}
+	</update>
+	
+	<delete id="deleteSolrPost">
+		delete from solr_post where sp_id = #{postId}
+	</delete>
+	
+</mapper>

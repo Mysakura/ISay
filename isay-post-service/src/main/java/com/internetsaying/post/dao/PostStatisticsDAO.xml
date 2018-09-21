@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.PostStatisticsDAO">
+	
+	<resultMap type="StatisticsAreaPost" id="statisticsAreaPost">
+		<result column="area_id" property="area.areaId"/>
+		<result column="area_name" property="area.areaName"/>
+		<result column="num" property="postNum"/>
+	</resultMap>
+	<resultMap type="StatisticsAreaLabel" id="statisticsAreaLabel">
+		<result column="area_id" property="area.areaId"/>
+		<result column="area_name" property="area.areaName"/>
+		<result column="num" property="labelNum"/>
+	</resultMap>
+	
+	<select id="getReleaseTopUser" resultType="StatisticsTopUser">
+		select count(*) num,author_id userId from post group by author_id order by num desc limit 1
+	</select>
+	
+	<select id="getUpTopUser" resultType="StatisticsTopUser">
+		select SUM(up_num) num,author_id userId from post group by author_id order by num desc limit 1
+	</select>
+	
+	<select id="getDownTopUser" resultType="StatisticsTopUser">
+		select SUM(down_num) num,author_id userId from post group by author_id order by num desc limit 1
+	</select>
+	
+	<select id="getVisitTopPost" resultType="StatisticsTopPost">
+		select post_id postId,post_title postTitle,visit_num num from post order by visit_num desc limit 1
+	</select>
+	
+	<select id="getCommentTopPost" resultType="StatisticsTopPost">
+		select post_id postId,post_title postTitle,comment_num num from post order by comment_num desc limit 1
+	</select>
+	
+	<select id="getCollectTopPost" resultType="StatisticsTopPost">
+		select post_id postId,post_title postTitle,collection_num num from post order by collection_num desc limit 1
+	</select>
+	
+	<select id="getUpTopPost" resultType="StatisticsTopPost">
+		select post_id postId,post_title postTitle,up_num num from post order by up_num desc limit 1
+	</select>
+	
+	<select id="getDownTopPost" resultType="StatisticsTopPost">
+		select post_id postId,post_title postTitle,down_num num from post order by down_num desc limit 1
+	</select>
+	
+	<select id="getAllPostCount" resultType="int">
+		select count(*) from post
+	</select>
+	
+	<select id="getAreaPostStatistics" resultMap="statisticsAreaPost">
+		select p.area_id,a.area_name,count(*) num from post p left join work_area a on p.area_id = a.area_id group by area_id
+	</select>
+	
+	<select id="getAreaLabelStatistics" resultMap="statisticsAreaLabel">
+		select a.area_id,a.area_name,count(*) num from work_area a left join area_label l on a.area_id = l.area_id GROUP BY l.area_id
+	</select>
+	
+	<select id="getMonthPostNumStatistics" resultType="StatisticsMonthPostNum">
+		select isay_time month,count(p.post_id) num from isay_time_list left join post p on DATE_FORMAT(p.post_time,'%Y-%m') = isay_time where SUBSTR(isay_time,1,4) = #{year} group by isay_time
+	</select>
+	
+	<select id="getPostUserStatistics" resultType="StatisticsTopTenUser">
+		select count(*) c,author_id userId,sum(up_num) upNum,sum(down_num) downNum,sum(visit_num) visitNum from post group by author_id order by c desc limit 10
+	</select>
+	
+	<select id="getPostTenStatistics" resultType="StatisticsTopTenPost">
+		select visit_num visitNum,comment_num commentNum,post_id postId,post_title postTitle from post order by up_num desc limit 10
+	</select>
+	
+</mapper>

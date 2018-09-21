@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+/*全局，站点所有文章样式*/
+.isay-article-wrap{
+    min-height: 700px;
+    margin-top: 25px;
+    margin-bottom: 55px;
+    box-shadow: 0 1px 10px #abaaaa;
+}

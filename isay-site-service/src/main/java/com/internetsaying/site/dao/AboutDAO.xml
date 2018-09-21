@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.site.dao.AboutDAO">
+	<resultMap type="About" id="about">
+		<id column="about_id" property="aboutId"/>
+		<result column="about_content" property="aboutContent"/>
+		<result column="about_markdown" property="aboutMarkdown"/>
+		<result column="about_type" property="aboutType"/>
+		<result column="about_time" property="aboutTime"/>
+		<!-- 因为是微服务，要数据独立，所以只能读取这个表存在的字段，想要读取详细信息，需要调用其他服务 -->
+		<association property="aboutEditor" column="editor_id" javaType="com.internetsaying.user.entity.User">
+			<!-- 这里因为读取出来的字段名是editor_id，所以就必须写editor_id，而不能是user_id -->
+			<id column="editor_id" property="userId"/>
+		</association>
+	</resultMap>
+	
+	<insert id="addAbout" parameterType="About">
+		insert into about values(#{aboutId},#{aboutContent},#{aboutMarkdown},#{aboutType},#{aboutEditor.userId},#{aboutTime})
+	</insert>
+	
+	<update id="updateAbout" parameterType="About">
+		update about set
+		about_content = #{aboutContent},about_markdown = #{aboutMarkdown},
+		editor_id = #{aboutEditor.userId},about_time = #{aboutTime}
+		where about_id = #{aboutId}
+	</update>
+	
+	<delete id="deleteAbout">
+		delete from about where about_id = #{aboutId}
+	</delete>
+	
+	<select id="getAboutById" resultMap="about">
+		select * from about where about_id = #{aboutId}
+	</select>
+	
+	<select id="getAboutByType" resultMap="about">
+		select * from about where about_type = #{type} order by about_time desc limit 0,1
+	</select>
+	
+	<select id="getAboutList" resultMap="about">
+		select * from about order by about_type
+	</select>
+	
+</mapper>

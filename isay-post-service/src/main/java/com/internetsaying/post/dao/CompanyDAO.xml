@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.CompanyDAO">
+	
+	<resultMap type="Company" id="company">
+		<id column="company_id" property="companyId"/>
+		<result column="company_name" property="companyName"/>
+		<result column="good_num" property="goodNum"/>
+		<result column="bad_num" property="badNum"/>
+		<result column="user_id" property="user.userId"/>
+		<result column="is_delete" property="isDelete"/>
+	</resultMap>
+	<resultMap type="CompanyLabel" id="companyLabel">
+		<id column="cl_id" property="labelId"/>
+		<result column="cl_name" property="labelName"/>
+		<result column="cl_type" property="labelType"/>
+		<result column="company_id" property="company.companyId"/>
+		<result column="user_id" property="user.userId"/>
+		<result column="is_delete" property="isDelete"/>
+	</resultMap>
+	
+	<insert id="addCompany" parameterType="Company">
+		insert into company(company_name,user_id) values(#{companyName},#{user.userId})
+	</insert>
+	
+	<update id="updateCompany" parameterType="Company">
+		update company
+		<set>
+			<if test="companyName != null">
+				company_name = #{companyName},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete}
+			</if>
+		</set>
+		where company_id = #{companyId}
+	</update>
+	
+	<select id="getCompanyList" resultMap="company">
+		select * from company limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getCompanyById" resultMap="company">
+		select * from company where company_id = #{companyId}
+	</select>
+	
+	<insert id="addCompanyLabel" parameterType="CompanyLabel">
+		insert into company_label(cl_name,cl_type,company_id,user_id)
+		values(#{labelName},#{labelType},#{company.companyId},#{user.userId})
+	</insert>
+	
+	<update id="updateCompanyLabel" parameterType="CompanyLabel">
+		update company_label
+		<set>
+			<if test="labelName != null">
+				cl_name = #{labelName},
+			</if>
+			<if test="isDelete != null">
+				is_delete = #{isDelete}
+			</if>
+		</set>
+		where cl_id = #{labelId}
+	</update>
+	
+	<select id="getCompanyLabelList" resultMap="companyLabel">
+		select * from company_label where company_id = #{companyId} limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getCompanyCount" resultType="int">
+		select count(*) from company
+	</select>
+	
+	<select id="getCompanyLabelCount" resultType="int">
+		select count(*) from company_label where company_id = #{companyId}
+	</select>
+	
+	<select id="getCompanyByName" resultMap="company">
+		select * from company where company_name = #{companyName}
+	</select>
+	
+	<select id="checkCompany" resultType="int">
+		select count(*) from company where company_name = #{companyName}
+	</select>
+	
+</mapper>

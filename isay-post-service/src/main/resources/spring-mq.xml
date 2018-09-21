@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:core="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.3.xsd">
+
+	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${activemq.brokerUrl}"></property>
+		<property name="userName" value="${activemq.userName}"></property>
+		<property name="password" value="${activemq.password}"></property>
+	</bean>
+
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="connectionFactory" ref="activeMQConnectionFactory"></property>
+		<property name="maxConnections" value="${activemq.pool.maxConnection}"></property>
+	</bean>
+	
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="pooledConnectionFactory"></property>
+	</bean>
+	
+	<bean id="postUpdateDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>${activemq.queueName1}</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="postSaveDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>${activemq.queueName2}</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="postCommentDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>${activemq.queueName3}</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="postReplyDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>${activemq.queueName4}</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>${activemq.queueName}</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg>
+			<value>${activemq.topicName}</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+	
+		<!--  
+		<property name="defaultDestinationName" value="${activemq.queueName}"></property>
+		-->
+		
+		<property name="defaultDestination" ref="queueDestination"></property>
+	</bean>
+
+</beans>

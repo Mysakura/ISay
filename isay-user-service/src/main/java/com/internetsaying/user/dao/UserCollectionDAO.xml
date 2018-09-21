@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.user.dao.UserCollectionDAO">
+
+	<insert id="addCollection" parameterType="UserCollection">
+		insert into user_collection(user_id,post_id) values(#{userId},#{postId})
+	</insert>
+
+	<select id="getUserCollectPostIds" resultType="java.lang.String">
+		select post_id from user_collection where user_id = #{userId} limit #{limitStart},#{pageSize}
+	</select>
+	<select id="getUserCollectPostCount" resultType="int">
+		select count(*) from user_collection where user_id = #{userId}
+	</select>
+	<select id="checkCollect" resultType="int">
+		select count(*) from user_collection where user_id = #{userId} and post_id = #{postId}
+	</select>
+	
+	<delete id="cancelCollect">
+		delete from user_collection where user_id = #{userId} and post_id = #{postId}
+	</delete>
+</mapper>

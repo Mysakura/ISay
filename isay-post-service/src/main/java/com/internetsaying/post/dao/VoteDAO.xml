@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.VoteDAO">
+	
+	<resultMap type="Vote" id="vote">
+		<id column="vote_id" property="voteId"/>
+		<result column="vote_content" property="voteContent"/>
+		<result column="vote_time" property="voteTime"/>
+		<result column="user_id" property="user.userId"/>
+		<result column="area_id" property="areaId"/>
+		<collection property="items" column="vote_id" ofType="VoteItem" javaType="java.util.List" select="getVoteItems"></collection>
+	</resultMap>
+	
+	<resultMap type="VoteItem" id="voteItem">
+		<id column="vi_id" property="itemId"/>
+		<result column="vi_content" property="itemContent"/>
+		<result column="vote_num" property="voteNum"/>
+		<result column="vote_id" property="vote.voteId"/>
+	</resultMap>
+	
+	<insert id="addVote" parameterType="Vote">
+		insert into vote(vote_id,vote_content,vote_time,user_id,area_id) values(#{voteId},#{voteContent},#{voteTime},#{user.userId},#{areaId})
+	</insert>
+	
+	<update id="deleteVote">
+		update vote set is_delete = #{isDelete} where vote_id = #{voteId}
+	</update>
+	
+	<select id="getVoteList" resultMap="vote">
+		select vote_id,vote_content,vote_time,user_id from vote where is_delete = '0' order by vote_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getVoteListOfHot" resultMap="vote">
+		select vote_id,vote_content,vote_time,user_id from vote where is_delete = '0' limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="getVoteListOfArea" resultMap="vote">
+		select vote_id,vote_content,vote_time,user_id from vote where is_delete = '0' and area_id = #{areaId} order by vote_time desc limit #{pageNo},#{pageSize}
+	</select>
+	<select id="getVoteCount" resultType="int">
+		select count(*) from vote where is_delete = '0' 
+	</select>
+	<select id="getVoteCountOfArea" resultType="int">
+		select count(*) from vote where is_delete = '0' and area_id = #{areaId}
+	</select>
+	
+	<select id="getVoteItems" resultMap="voteItem">
+		select * from vote_item where vote_id = #{voteId}
+	</select>
+	
+	
+	<insert id="addVoteItem">
+		insert into vote_item(vi_content,vote_num,vote_id) values
+		<foreach collection="items" item="i" separator=",">
+			(#{i.itemContent},#{i.voteNum},#{i.vote.voteId})
+		</foreach>
+	</insert>
+	
+	<insert id="addVoter" parameterType="Voter">
+		insert into voter(user_id,vi_id,vote_id) values(#{userId},#{itemId},#{voteId})
+	</insert>
+	
+	<select id="checkVoter" resultType="int">
+		select count(*) from voter where user_id = #{userId} and vote_id = #{voteId}
+	</select>
+	
+</mapper>

@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+.tl-item{
+    padding: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.tl-content{
+    margin-right: 155px;
+}
+
+.tl-time{
+    height: 100%;
+    vertical-align: middle;
+}
+
+.write-timeline{
+     display: inline-block;
+     background-color: #ff4f4f;
+     color: #fff !important;
+     font-size: 18px;
+     font-weight: 700;
+     border-radius: 3px;
+     padding: 8px 8px;
+     margin-bottom: 25px;
+ }
+.write-timeline:hover{
+    background-color: #bb1e1e;
+    text-decoration: none;
+}
+
+.timeline-textarea{
+    height: 100px !important;
+}

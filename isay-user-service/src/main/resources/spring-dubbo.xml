@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="dubbo-user-service"/>
+	
+	<dubbo:registry protocol="zookeeper" address="${dubbo.register.address}"/>
+	<dubbo:protocol name="dubbo" port="${dubbo.register.port}"/>
+	<dubbo:provider timeout="${dubbo.timeout}"></dubbo:provider>
+	
+	<!-- Service 
+	-->
+	<bean id="userService" class="com.internetsaying.user.service.impl.UserServiceImpl"></bean>
+	<bean id="personalLetterService" class="com.internetsaying.user.service.impl.PersonalLetterServiceImpl"></bean>
+	<bean id="systemMsgService" class="com.internetsaying.user.service.impl.SystemMsgServiceImpl"></bean>
+	<bean id="fansService" class="com.internetsaying.user.service.impl.FansServiceImpl"></bean>
+	<bean id="userCollectionService" class="com.internetsaying.user.service.impl.UserCollectionServiceImpl"></bean>
+	<bean id="userRoleService" class="com.internetsaying.user.service.impl.UserRoleServiceImpl"></bean>
+
+	<!-- Publish -->
+	<dubbo:service interface="com.internetsaying.user.service.UserService" ref="userService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.user.service.PersonalLetterService" ref="personalLetterService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.user.service.SystemMsgService" ref="systemMsgService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.user.service.FansService" ref="fansService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.user.service.UserCollectionService" ref="userCollectionService"></dubbo:service>
+	<dubbo:service interface="com.internetsaying.user.service.UserRoleService" ref="userRoleService"></dubbo:service>
+	
+	<!-- Need -->
+	<!--  
+	<dubbo:reference interface=""></dubbo:reference>
+	-->
+	
+</beans>

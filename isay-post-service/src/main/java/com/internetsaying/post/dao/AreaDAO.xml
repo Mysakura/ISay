@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.post.dao.AreaDAO">
+	<resultMap type="WorkArea" id="area">
+		<id column="area_id" property="areaId"/>
+		<result column="area_name" property="areaName"/>
+	</resultMap>
+	<resultMap type="AreaLabel" id="areaLabel">
+		<id column="al_id" property="labelId"/>
+		<result column="al_name" property="labelName"/>
+	</resultMap>
+	
+	<insert id="addArea">
+		insert into work_area(area_name) values
+		<foreach collection="areaList" item="a" separator=",">
+			(#{a.areaName})
+		</foreach>
+	</insert>
+	
+	<update id="updateArea" parameterType="WorkArea">
+		update work_area set area_name = #{areaName} where area_id = #{areaId}
+	</update>
+	
+	<delete id="deleteArea">
+		delete from work_area where area_id = #{areaId}
+	</delete>
+	
+	<select id="getAreas" resultMap="area">
+		select * from work_area
+	</select>
+	
+	<select id="getAreaById" resultMap="area">
+		select * from work_area where area_id = #{areaId}
+	</select>
+	
+	<insert id="addAreaLabel">
+		insert into area_label(al_name,area_id) values
+		<foreach collection="labelList" item="l" separator=",">
+			(#{l.labelName},#{l.workArea.areaId})
+		</foreach>
+	</insert>
+	
+	<update id="updateAreaLabel">
+		update area_label set al_name = #{labelName} where al_id = #{labelId}
+	</update>
+	
+	<delete id="deleteAreaLabel">
+		delete from area_label where al_id = #{labelId}
+	</delete>
+	
+	<select id="getAreaLabel" resultMap="areaLabel">
+		select * from area_label where area_id = #{areaId}
+	</select>
+	
+	<select id="getAreaIdByName" resultType="int">
+		select area_id from work_area where area_name = #{areaName}
+	</select>
+</mapper>

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+.write-vote-wrap{
+    min-height: 500px;
+}
+.write-vote-wrap .vote-content{
+    min-height: 100px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    outline: none;
+    color: #707070;
+    font-size: 16px;
+}
+.write-vote-wrap .vote-content:empty:before{
+    content: attr(data-tip);
+    color: #bbb;
+}
+.write-vote-wrap .vote-content:focus:before{
+    content: none;
+}
+
+.write-vote-wrap .vote-options{
+
+}
+.write-vote-wrap .preview-content{
+    font-size: 16px;
+    color: #707070;
+}
+.write-vote-wrap .preview-options{
+
+}
+.write-vote-wrap .preview-options .option{
+    display: block;
+    text-decoration: none;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+.write-vote-wrap .preview-options .active{
+    color: #fff;
+    background-color: #FF404E;
+    border: 1px solid #FF404E;
+}
+
+.write-vote-wrap .add-padding{
+    margin-top: 35px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border-top: 1px solid #ddd;
+}

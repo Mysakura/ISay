@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+.about-list-type{
+    border-bottom: 1px solid #a2a2a2;
+    margin-bottom: 15px;
+}
+
+.about-list-type > a{
+    font-size: 16px;
+    font-weight: 700;
+}

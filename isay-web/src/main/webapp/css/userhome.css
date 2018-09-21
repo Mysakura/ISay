@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+
+.userhome-wrap{
+    margin-top: -56px;
+    margin-bottom: 100px;
+}
+
+.userhome-wrap .userhome-info{
+    min-height: 350px;
+    /*background-image: url("icon/default-userbg.jpg");*/
+    /*background-position: bottom;*/
+    background-size: cover;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+}
+.userhome-wrap .userhome-info .u-pic{
+    margin-top: 25px;
+    width: 150px;
+    border-radius: 50%;
+}
+.userhome-wrap .userhome-info .u-info{
+    margin-top: 25px;
+    font-size: 16px;
+}
+.userhome-wrap .userhome-info .u-info .info-block{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.51);
+    border-radius: 3px;
+    padding: 8px;
+}
+.userhome-wrap .userhome-info .u-info span{
+    margin: 0 10px;
+	line-height: 25px;
+}
+.userhome-wrap .userhome-info .u-btn-wrap{
+    margin-top: 25px;
+}
+.userhome-wrap .userhome-info .u-btn-wrap .u-btn{
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 4px 8px;
+    color: #fff;
+    line-height: 40px;
+}
+.userhome-wrap .userhome-info .u-btn-wrap .u-btn-red{
+    border: 1px solid #FF404E;
+    background-color: #FF404E;
+}
+.userhome-wrap .userhome-info .u-btn-wrap .u-btn-red:hover{
+    border: 1px solid #d6313d;
+    background-color: #d6313d;
+}
+.userhome-wrap .userhome-info .u-btn-wrap .u-btn-green{
+    border: 1px solid #09cc69;
+    background-color: #09cc69;
+}
+.userhome-wrap .userhome-info .u-btn-wrap .u-btn-green:hover{
+    border: 1px solid #01984c;
+    background-color: #01984c;
+}
+.userhome-wrap .userhome-info .u-btn-wrap .u-btn-blue{
+    border: 1px solid #0972cc;
+    background-color: #0972cc;
+}
+.userhome-wrap .userhome-info .u-btn-wrap .u-btn-blue:hover{
+    border: 1px solid #125c7d;
+    background-color: #125c7d;
+}
+
+/*男女标志*/
+.userhome-wrap .man-icon{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-image: url(icon/svg-mann.svg);
+    background-size: cover;
+}
+.userhome-wrap .woman-icon{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-image: url(icon/svg-womann.svg);
+    background-size: cover;
+}
+.userhome-wrap .sex-none-icon{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-image: url(icon/svg-sex-none.svg);
+    background-size: cover;
+    vertical-align: bottom;
+}
+.userhome-wrap .sex-man-icon{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-image: url(icon/svg-sex-man.svg);
+    background-size: cover;
+    vertical-align: bottom;
+}
+.userhome-wrap .sex-woman-icon{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-image: url(icon/svg-sex-woman.svg);
+    background-size: cover;
+    vertical-align: bottom;
+}
+
+/*我的帖子*/
+.my-post-wrap{
+    margin-top: 25px;
+}
+.my-post-wrap .my-post{
+    overflow: hidden;
+}
+.my-post-img{
+    height: 115px;
+    margin-left: 40px;
+}
+.my-post-p{
+    font-size: 16px;
+    text-align: justify;
+}
+.my-post-p:first-letter{
+    font-size: 25px;
+}
+.my-post-span{
+    display: inline-block;
+    margin-right: 10px;
+}
+.my-post-edit{
+	color: #73b509;
+	font-weight: 600;
+	margin-right: 10px;
+}
+.my-post-edit:hover{
+	color: #73b509;
+}
+.my-post-del{
+	color: #e04242;
+    font-weight: 600;
+}
+.my-post-del:hover{
+	color: #e04242;
+}
+
+/*otherhome*/
+.support-pic{
+    width: 150px;
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.internetsaying.site.dao.MessageBoardDAO">
+
+	<resultMap type="MessageBoard" id="messageBoard">
+		<id column="message_id" property="messageId"/>
+		<result column="message_content" property="messageContent"/>
+		<result column="message_time" property="messageTime"/>
+		<result column="user_id" property="user.userId"/>
+		<result column="reply_num" property="replyNum"/>
+		<result column="is_delete" property="isDelete"/>
+		<!-- 获取留言对应的回复 -->
+		<collection property="replies" column="message_id" javaType="java.util.List" ofType="MessageBoardReply" select="getReplyList"></collection>
+	</resultMap>
+	
+	<resultMap type="MessageBoardReply" id="messageReply">
+		<id column="mr_id" property="mrId"/>
+		<result column="mr_content" property="mrContent"/>
+		<result column="mr_time" property="mrTime"/>
+		<result column="message_id" property="mrMessage.messageId"/>
+		<result column="from_user_id" property="fromUser.userId"/>
+		<result column="to_user_id" property="toUser.userId"/>
+		<result column="is_delete" property="isDelete"/>
+	</resultMap>
+	
+	<sql id="msgFields">message_id,message_content,message_time,user_id</sql>
+	
+	<insert id="addMessage" parameterType="MessageBoard">
+		insert into message_board(<include refid="msgFields"/>) values(#{messageId},#{messageContent},#{messageTime},#{user.userId})
+	</insert>
+	
+	<update id="updateMessage" parameterType="MessageBoard">
+		update message_board set is_delete = #{isDelete} where message_id = #{messageId}
+	</update>
+	
+	<select id="checkMessageBelong" parameterType="MessageBoard" resultType="int">
+		select count(*) from message_board where message_id = #{messageId} and user_id = #{user.userId}
+	</select>
+	
+	<select id="getMessageList" resultMap="messageBoard">
+		select * from message_board order by message_time desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<!-- 因为有回复者和被回复者两个字段，并且需要去重，所以要union查询 -->
+	<select id="getUserIdsOfMessageList" resultType="String">
+		(select from_user_id u from message_board_reply where message_id in
+		<foreach collection="mIds" item="id" open="(" separator="," close=")">#{id}</foreach>)
+		union
+		(select to_user_id u from message_board_reply where message_id in
+		<foreach collection="mIds" item="id" open="(" separator="," close=")">#{id}</foreach>)
+	</select>
+	
+	<select id="getMessageCount" resultType="int">
+		select count(*) from message_board
+	</select>
+	
+	<!-- 以下是回复 -->
+	
+	<sql id="replyFields">mr_id,mr_content,mr_time,message_id,from_user_id,to_user_id</sql>
+	
+	<insert id="addReply" parameterType="MessageBoardReply">
+		insert into message_board_reply(<include refid="replyFields"/>) values(
+		#{mrId},#{mrContent},#{mrTime},#{mrMessage.messageId},#{fromUser.userId},#{toUser.userId})
+	</insert>
+	
+	<update id="updateReply" parameterType="MessageBoardReply">
+		update message_board_reply set is_delete = #{isDelete} where mr_id = #{mrId}
+	</update>
+	
+	<select id="checkReplyBelong" parameterType="MessageBoardReply" resultType="int">
+		select count(*) from message_board_reply where mr_id = #{mrId} and from_user_id = #{fromUser.userId}
+	</select>
+	
+	<select id="getReplyList" resultMap="messageReply">
+		select * from message_board_reply where message_id = #{messageId}
+	</select>
+
+	<select id="getReplyCount" resultType="int">
+		select count(*) from message_board_reply
+	</select>
+</mapper>

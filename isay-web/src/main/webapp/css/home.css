@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/*isay:InternetSaying的缩写*/
+
+.home-banner-wrap{
+    margin: 0 -15px;
+    overflow: hidden;
+}
+.home-banner-table{
+    display: table;
+    width: 100%;
+    height: 550px;
+}
+.home-banner{
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+}
+.banner-1{
+    background-image: url("icon/bg.jpg");
+}
+.banner-2{
+    background-image: url("icon/bg-2.jpg");
+}
+.banner-3{
+    background-image: url("icon/bg-3.jpg");
+}
+.home-banner .title{
+    font-size: 65px;
+}
+.home-banner .info{
+    font-size: 35px;
+}
+
+/*子banner*/
+.home-banner-child-wrap{
+    height: auto;
+    border-top: 1px solid #ddd;
+}
+.home-banner-child{
+    background-position: bottom;
+    background-size: cover;
+    height: 450px;
+}
+.home-banner-child-table{
+    display: table;
+    width: 100%;
+    height: 450px;
+}
+.home-banner-child-table .home-banner-child-cell{
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+}
+.home-banner-child-table .home-banner-child-cell title{
+    color: #122b40;
+}
+.home-banner-child-table .home-banner-child-cell .info{
+    color: #122b40;
+}
+
+/*使用说明*/
+.home-get-start{
+    padding: 25px;
+    background-color: #DAECF3;
+    margin: 0 -15px;
+}
+.home-get-start .link-btn{
+    display: inline-block;
+    padding: 10px 60px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: #FF404E;
+    color: #fff;
+}
+.home-get-start .link-btn:hover{
+    background-color: #e02936;
+}
+
+/*增加内边距*/
+.home-add-padding{
+    padding: 15px;
+}
