@@ -28,7 +28,7 @@
 		<mysql.driver.version>5.1.40</mysql.driver.version>
 		<dubbo.version>2.5.6</dubbo.version>
 		<zookeeeper.version>3.4.10</zookeeeper.version>
-		<activemq.version>5.15.0</activemq.version>
+		<activemq.version>5.15.10</activemq.version>
 		<curator.version>4.0.0</curator.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>2.8.2</log4j.version>
