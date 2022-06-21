@@ -25,7 +25,7 @@
 		<spring.session.version>1.3.1.RELEASE</spring.session.version>
 		<mybatis.version>3.4.4</mybatis.version>
 		<mybatis.spring.version>1.3.1</mybatis.spring.version>
-		<mysql.driver.version>5.1.40</mysql.driver.version>
+		<mysql.driver.version>8.0.28</mysql.driver.version>
 		<dubbo.version>2.5.6</dubbo.version>
 		<zookeeeper.version>3.4.10</zookeeeper.version>
 		<activemq.version>5.15.0</activemq.version>
