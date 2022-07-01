@@ -47,7 +47,7 @@
 		<kryo.version>4.0.0</kryo.version>
 		<kryo.ser.version>0.42</kryo.ser.version>
 		<shiro.version>1.3.2</shiro.version>
-		<kafka.version>0.11.0.1</kafka.version>
+		<kafka.version>0.11.0.2</kafka.version>
 		<javamail.version>1.6.1</javamail.version>
 	</properties>
 	
